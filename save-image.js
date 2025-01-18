@@ -48,7 +48,7 @@ function saveAsPng(){
     ctx.drawImage(tempImg, 0, 0);
     var a  = document.createElement('a');
     a.href = canvas.toDataURL('image/png');
-    a.download = 'image.png';
+    a.download = uuidv4() + '.png';
     a.click();
 }
 
@@ -104,4 +104,10 @@ function convertImgToBase64(file, callback){
         callback(reader.result);
     };
     reader.readAsDataURL(file);
+}
+
+function uuidv4() {
+    return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+      (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+    );
 }
